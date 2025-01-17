@@ -1,4 +1,24 @@
-import collection 
+import collections 
 class Solution:
     def timeRequiredToBuy(self, tickets: List[int], k: int) -> int:
-        pass
+        q = collections.deque([])
+        for x in range(len(tickets)):
+            q.append(x)
+
+        index = 0
+        time = 1
+        while len(q) > 0:
+            if index > len(q):
+                index = 0
+
+            tempIndex = q.popleft()
+            if tempIndex == k:
+                if tickets[tempIndex] == 1:
+                    return time 
+            tickets[tempIndex] -=1
+            if tickets[tempIndex] != 0:
+                q.append(tempIndex)
+
+            time+=1
+        
+        return time 
